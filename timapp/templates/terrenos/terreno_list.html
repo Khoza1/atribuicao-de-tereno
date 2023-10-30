@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Terrenos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Lista de Terrenos</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Proprietário</th>
+                <th>Limites da Propriedade</th>
+                <th>Uso da Terra</th>
+                <th>Localização</th>
+                <th>Histórico de Transações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for terreno in terrenos %}
+            <tr>
+                <td>{{ terreno.proprietario }}</td>
+                <td>{{ terreno.limites_propriedade }}</td>
+                <td>{{ terreno.uso_da_terra }}</td>
+                <td>{{ terreno.localizacao }}</td>
+                <td>{{ terreno.historico_transacoes }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* Estilos gerais da página */
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+    }
+
+    /* Estilos para tabelas responsivas */
+    table {
+        font-size: 16px;
+    }
+
+    /* Estilos para cabeçalho da tabela */
+    th {
+        background-color: #007BFF;
+        color: #fff;
+    }
+
+    /* Estilos para linhas da tabela */
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilos para links na tabela */
+    a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+</style>
+
+</body>
+</html>

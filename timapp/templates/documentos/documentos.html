@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Documentos Relacionados a Terrenos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Documentos Relacionados a Terrenos</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Terreno</th>
+                <th>Tipo</th>
+                <th>Arquivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for documento in documentos %}
+            <tr>
+                <td>{{ documento.terreno }}</td>
+                <td>{{ documento.tipo }}</td>
+                <td>
+                    <a href="{{ documento.arquivo.url }}" target="_blank">{{ documento.arquivo.name }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* Estilos gerais da página */
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+    }
+
+    /* Estilos para tabelas responsivas */
+    table {
+        font-size: 16px;
+    }
+
+    /* Estilos para cabeçalho da tabela */
+    th {
+        background-color: #FFC107;
+        color: #fff;
+    }
+
+    /* Estilos para linhas da tabela */
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilos para links na tabela */
+    a {
+        color: #FFC107;
+        text-decoration: none;
+    }
+
+</style>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recursos Naturais</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Recursos Naturais</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Tipo</th>
+                <th>Localização</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recurso in recursos %}
+            <tr>
+                <td>{{ recurso.nome }}</td>
+                <td>{{ recurso.quantidade }}</td>
+                <td>{{ recurso.tipo }}</td>
+                <td>{{ recurso.localizacao }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* Estilos gerais da página */
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+        width: 100%;
+    }
+
+    /* Estilos para tabelas responsivas */
+    table {
+        font-size: 16px;
+    }
+
+    /* Estilos para cabeçalho da tabela */
+    th {
+        background-color: #28A745;
+        color: #fff;
+    }
+
+    /* Estilos para linhas da tabela */
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilos para links na tabela */
+    a {
+        color: #28A745;
+        text-decoration: none;
+    }
+
+</style>
+
+</body>
+</html>
