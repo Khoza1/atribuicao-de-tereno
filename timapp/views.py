@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Terreno, RecursoNatural, Documento
+from .models import Terreno, RecursoNatural, Documento,ModeloExpiravel,SeuModelo
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from .forms import TerrenoForm, RecursoNaturalForm, DocumentoForm
+#from celery import shared_task
+from django.utils import timezone
 
 
 def terreno_list(request):
@@ -82,6 +84,64 @@ def gerar_relatorio(request):
     return response
 
 
+from django.shortcuts import render
+
+def map_view(request):
+    # Você pode passar dados do banco de dados ou qualquer outro local para exibir no mapa
+    parcelas = [
+        {
+            'nome': 'Parcela 1',
+            'latitude': 12.9716,
+            'longitude': 77.5946,
+        },
+        {
+            'nome': 'Parcela 2',
+            'latitude': 13.0827,
+            'longitude': 80.2707,
+        },
+    ]
+
+    return render(request, 'map.html', {'parcelas': parcelas})
+
+
+
 def index(request):
     # Página inicial do sistema
     return render(request, 'index.html')
+
+"""F
+####
+#@shared_task
+def excluir_modelos_expirados():
+    agora = timezone.now()
+    limite_tempo = agora - timezone.timedelta(hours=24)
+    modelos_expirados = ModeloExpiravel.objects.filter(data_criacao__lt=limite_tempo)
+    modelos_expirados.delete()
+"""
+
+
+
+def excluir_modelo_apos_24_horas(request, modelo_id):
+    try:
+        from django.utils import timezone
+        
+        modelo = SeuModelo.objects.get(id=modelo_id)
+        agora = timezone.now()
+
+        # Verifique se o modelo tem mais de 24 horas
+        diferenca_tempo = agora - modelo.data_de_criacao  # Subtrai a data de criação do modelo da data atual
+        horas_passadas = diferenca_tempo.total_seconds() / 120 #(3600)=24  # Converte a diferença de tempo para horas
+
+        if horas_passadas >= 2:
+            # Se passaram 24 horas, exclua o modelo
+            modelo.delete()
+            return HttpResponse("O modelo foi excluído após 24 horas.")
+        else:
+            return HttpResponse("Ainda não passaram 24 horas.")
+    except SeuModelo.DoesNotExist:
+        return HttpResponse("Modelo não encontrado.")
+
+
+
+
+

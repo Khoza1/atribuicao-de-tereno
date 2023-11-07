@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'timapp',
+     # ...
+    #'leaflet',
+    # ...
 ]
 
 
@@ -116,6 +119,49 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+# meu_projeto/settings.py
+
+# Configurações do Celery
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# Configurar o nome do aplicativo Celery
+CELERY_APP_NAME = 'timapp'
+
+
+
+"""
+# Configurar a tarefa de exclusão de modelos expirados para ser executada a cada hora
+CELERY_BEAT_SCHEDULE = {
+    'excluir-modelos-expirados': {
+        'task': 'meu_app.tasks.excluir_modelos_expirados',
+        'schedule': crontab(minute=0, hour='*/1'),  # Executa a cada hora
+    },
+}
+"""
+
+
+# meu_projeto/settings.py
+
+# Configurar a tarefa de exclusão de modelos expirados para ser executada a cada 24 horas
+CELERY_BEAT_SCHEDULE = {
+    'excluir-modelos-expirados': {
+        'task': 'meu_app.tasks.excluir_modelos_expirados',
+        'schedule': 86400,  # 86.400 segundos (24 horas)
+    },
+}
+
+"""
+LEAFLET_CONFIG = {
+    'PLUGINS': {
+        'esri-geocoder': {
+            'js': 'https://js.arcgis.com/3.38/',
+            'auto-include': True,
+        },
+    },
+}
+"""
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
